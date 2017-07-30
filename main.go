@@ -11,7 +11,7 @@ import (
 	"regexp"
 )
 
-var regionRe = regexp.MustCompile(`([a-zA-Z]*-[a-zA-Z]*\d)-[a-zA-Z]`)
+var regionRe = regexp.MustCompile(`(\w*-\w*\d)-\w`)
 
 func main() {
 	project := os.Args[1]
