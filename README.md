@@ -1,4 +1,4 @@
-# consul_autogoin
+# consul_autojoin
 Tool for auto joining on GCP
 
 
