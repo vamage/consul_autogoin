@@ -22,5 +22,5 @@ func main() {
 func kvAssault(config *consulapi.Config, count int, prefix string, wg sync.WaitGroup) {
 	defer wg.Done()
 	consul, _ := consulapi.NewClient(config)
-	consul.Catalog().
+	consul.Catalog()
 }

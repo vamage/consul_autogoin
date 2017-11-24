@@ -10,12 +10,14 @@ import (
 
 func main() {
 	config := consulapi.DefaultConfig()
-	go register(config)
+	go register(config, "consul")
+	go register(config, "notconsul")
+	go register(config, "notconsul")
 	time.Sleep(1000 * time.Second)
 
 }
 
-func register(config *consulapi.Config) {
+func register(config *consulapi.Config, service string) {
 	consul, _ := consulapi.NewClient(config)
 	tags := []string{"foo", "test"}
 	uuid, _ := uuid2.GenerateUUID()
@@ -24,20 +26,20 @@ func register(config *consulapi.Config) {
 	register := consulapi.CatalogRegistration{
 		ID: uuid,
 		Service: &consulapi.AgentService{
-			ID:      "consul",
+			ID:      service,
 			Tags:    tags,
 			Port:    80,
 			Address: ip,
-			Service: "consul",
+			Service: service,
 		},
 		Check: &consulapi.AgentCheck{
 			CheckID:     "3",
 			Status:      "passing",
-			ServiceID:   "consul",
-			ServiceName: "consul",
+			ServiceID:   service,
+			ServiceName: service,
 		},
 
-		Node:    fmt.Sprintf("test%d", rand.Intn(25400)),
+		Node:    fmt.Sprintf("tes2t%d", rand.Intn(25400)),
 		Address: "127.0.0.2",
 	}
 	catalog := consul.Catalog()
